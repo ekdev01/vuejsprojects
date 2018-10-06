@@ -9,6 +9,7 @@
 </template>
 
 <script>
+    import UserDetails from './UserDetails.vue';
     export default {  
         name: 'user-list',
         components: {
