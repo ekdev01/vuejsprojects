@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="vue2.5.17.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+  <title>sandbox</title>
+</head>
+<body>
+    <div id="app">
+       {{ this.waysToContact}}
+
+       <div>
+           s'inscrire à une newsletter : <input type="texte" placeholder="votre adresse email" v-model="emailForNewsletter">
+           <!-- On affiche le bouton si l'email est valide -->
+           <button v-bind:disabled="emailAddressInvalid">inscription</button>
+       </div>
+
+       <div>
+           <h2>Votre avis</h2>
+           <div>
+               <input type="text" placeholder="votre avis" v-model="opinion">
+               {{opinionResult}}
+           </div>
+       </div>
+
+       <div>
+           <h2>Chercher un  utilisateur GitHub</h2>
+           <input type="text" v-model="githubUser"><br />
+           {{githubUserResult}}
+       </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+               email: 'bill@ms.com',
+               phone: '06 07 08 09 10',
+               emailForNewsletter: '',
+               opinion: '',
+               opinionResult: '',
+               githubUser: '',
+               githubUserResult: ''
+            },
+            // Les properties computed
+            computed: {
+                // computed waysToContact
+                waysToContact: function(){
+                    return 'email: ' + this.email + ' tel: ' + this.phone;
+                },
+                // computed emailAddressInvalid
+                emailAddressInvalid: function(){
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return !re.test(this.emailForNewsletter);
+                }
+            },
+            // Les properties watcher
+            watch: {
+                opinion: function(newValue) {
+                    //console.log(newValue);
+                    /*
+                      Watcher surveillance zone de texte
+                      Nous supposons que mot azerty est une insulte
+                    */
+                    if(newValue.indexOf('azerty') !== -1 ) {
+                        this.opinionResult = 'Restez poli!';
+                    } else {
+                        this.opinionResult = '';
+                    }
+                },
+                /* Watcher pour la gestion des requetes asynchrones */
+                /*githubUser: function(username) {
+                    axios.get('https://api.github.com/users/' + username)
+                    .then(function(data) {
+                        console.log(data);
+                    })
+                }*/
+                // le debounce attend 700 ms avant d'envoyer la requete ajax
+                githubUser: _.debounce(function(username){
+                    axios.get('https://api.github.com/users/' + username).then(function(data) {console.log(data);})
+                }, 700)
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-devise-width">
+    <script src="vue2.5.17.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Hello Vue.js</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- Soit le composant my-card -->
+    <my-card>
+        <h3 slot="cardheader">Blog JavaScript</h3>
+        <div slot="cardbody">Visitez meansjs.fr</div>
+    </my-card>
+    <hr>
+
+    <h2>Utilisateurs</h2>
+    <ul>
+        <user-list v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></user-list>
+    </ul>
+    <br />
+    <!-- Affichage type debug-->
+    <!-- <div><pre>{{usersWhoWillCome}}</pre></div> -->
+
+    <!-- Affichage sous forme de liste-->
+    <ul>
+        <li v-for="user in usersWhoWillCome">{{user.id}} -  {{user.email}}</li>
+    </ul>
+
+    <hr>
+    <!-- Affichage dans une div-->
+    <div v-for="user in usersWhoWillCome">
+        {{user.id}} -  {{user.email}}
+    </div>
+</div>
+
+<script>
+    /**
+     * Composant: my-card
+     * Mise en oeuvre de la transclusion
+     *
+     * Pour que le composant puisse prendre en compte le contenu passé entre les tags
+     * du composant, il faut utiliser un slot (qui peut prendre un contenu par defaut
+     */
+    Vue.component('my-card', {
+        template: '<div><slot name="cardheader">titre par défaut</slot><slot name="cardbody">contenu par défaut</slot></div>'
+    });
+
+    Vue.component('user-list', {
+        // On positionne l'ecoute de l'event sur le composant parent avec v-on:nom_event="fonction"
+        template: '<div>\
+            <ul><li v-for="user in data"><user-details v-bind:usr="user" v-on:accept="registerUser(user)"></user-details></li></ul>\
+        </div>',
+        props: ['data', 'usersComing'],
+        methods: {
+            registerUser: function (user) {
+                console.log(user);
+                this.usersComing.push(user);
+                console.log(this.usersComing);
+            }
+        }
+    });
+
+    Vue.component('user-details', {
+        template: '<div>id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} <button v-on:click="acceptInvitation">Accept invit</button></div>',
+        props: ['usr'],
+        methods: {
+            // Permet d'emettre un event, ici $emit
+            acceptInvitation: function () {
+                this.$emit('accept');
+            }
+        }
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            title: 'Lifecycle hooks',
+            usersUrl: 'https://jsonplaceholder.typicode.com/users',
+            users: [],
+            // La resposabilite de afficher les utilisateurs qui ont accepte l'invitation dans le parent
+            // On ajoute une propriete de type tableau pour recuperer ces utilisateurs
+            usersWhoWillCome: []
+        },
+        beforeCreate: function () {
+            console.log('beforeCreate');
+        },
+        created: function () { // Lifecycle hooks pour les requetes Ajax
+            axios.get(this.usersUrl)
+                .then(function (response) {
+                    //console.log(vm);
+                    vm.users = response.data;
+                    console.log(vm.users);
+                })
+        }
+    })
+</script>
+
+</body>
+</html>

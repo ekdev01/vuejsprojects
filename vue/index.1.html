@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-devise-width">
+    <script src="vue2.5.17.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Hello Vue.js</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{title}}</h2>
+    <!--
+     On desactive le comportement par defaut du formulaire
+     (l'actualisation de la page apres le submit avec la propriete "prevent")
+    -->
+    <form v-on:submit.prevent="addTask()">
+        <input type="text" placeholder="tâche à effectuer" v-model="task">
+        <select v-model="type">
+            <option selected>Choisir le type</option>
+            <option>One shot</option>
+            <option>Recurrente</option>
+        </select>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <ul>
+        <li
+                v-bind:class="{completed: task.done}"
+                v-on:click="task.done = !task.done"
+                v-for="task in tasks">
+            <!-- Afficher du contenu HTML conditionnellement -->
+            <span v-if="!task.isInEditMode">
+                            <i class="fa fa-edit" v-on:click="switchMode(task)"></i>
+                            {{task.description}}
+                            {{task.type}}
+                            <span v-if="!task.done">
+                                <i class="fa fa-trash-o" v-on:click="deleteTask(task)"></i>
+                            </span>
+                        </span>
+
+            <span v-else>
+                            <i class="fa fa-thumbs-o-up"></i>
+                            <input type="text" v-model="task.description" v-on:keyup.enter="switchMode(task)">
+                        </span>
+        </li>
+
+    </ul>
+</div>
+
+<script>
+    var vm  = new Vue({
+        el: '#app',
+        data: {
+            title: 'A faire',
+            task: null,
+            tasks: [],
+            type: null
+
+        },
+        methods: {
+            addTask: function(event) {
+                // Ajout de la tache dans le tableau tasks
+                this.tasks.push({
+                    id: Date.now(),
+                    description: this.task,
+                    type: this.type,
+                    done: false,
+                    isInEditMode: false
+                });
+                //console.log('tasks ', this.tasks);
+                // Re-init de la tache
+                this.task = null;
+                this.type = null;
+            },
+            switchMode: function (task) {
+                task.isInEditMode = !task.isInEditMode;
+                console.log(task);
+            },
+            deleteTask: function (task) {
+                // Ce filtre retourne tous les elements dont l'id est différent de
+                // l'id de la task courante.
+                this.tasks = this.tasks.filter(function (t) {
+                    return t.id !== task.id;
+                });
+                console.log('tasks ', this.tasks);
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

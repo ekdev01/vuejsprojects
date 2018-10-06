@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-devise-width">
+    <script src="../vue2.5.17.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Hello Vue.js</title>
+</head>
+<body>
+
+<div id="app">
+    <!-- Appel des composants comme des tags html5 -->
+    <global-cmp></global-cmp>
+
+    <!--
+       Passage des donnees d'un composant vers un composant enfant
+       avec la directive v-bind:props="data_composant_parent"
+       (props = variable / propriete)
+    -->
+    <my-cmp msg="voici un texte en dur" v-bind:color="color"></my-cmp>
+    <my-cmp v-bind:msg="message"></my-cmp>
+</div>
+
+<script>
+    // Composant global
+    Vue.component('global-cmp', {
+        template: '<div>composant global</div>'
+    });
+
+    // Composant local / enfant
+    var myCmp = {
+        // Donnees du composant enfant
+        data: function () {
+            return {
+                randomNumber: Math.floor(Math.random() * 10)
+            }
+        },
+        template: '<p>composant local: {{randomNumber}} <button v-on:click="refreshNumber">Rafraichir</button> Passé par le parent: {{msg}}. Ma couleur passée par le parent est {{color}}</p>',
+        // Methode composant enfant
+        methods: {
+            refreshNumber: function () {
+                this.randomNumber = Math.floor(Math.random() * 10)
+            }
+        },
+        // Declaration des props du composant enfant
+        props: ['msg','color']
+    };
+
+    // Composant principal / parent
+    var vm = new Vue({
+        el: '#app',
+        components: { 'my-cmp': myCmp },
+        data: {
+            message: 'salut enfant!',
+            color: 'red'
+        }
+    });
+</script>
+
+</body>
+</html>
