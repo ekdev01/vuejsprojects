@@ -1,6 +1,7 @@
 <template>
   <div>
-   <user-list v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></user-list>
+    <!--<user-list v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></user-list>-->
+    <router-view v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></router-view>
     <div v-for="user in usersWhoWillCome">
       {{user.id}} -  {{user.email}}
     </div>
@@ -13,9 +14,6 @@
 
   export default {
     name: 'app',
-    components: {
-      'user-list': UserList
-    },
     data () {
       return {
         usersUrl: 'https://jsonplaceholder.typicode.com/users',
