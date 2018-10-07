@@ -2,18 +2,18 @@
     <div>
         <ul>
             <li v-for="user in data">
-                <user-details v-bind:usr="user" v-on:accept="registerUser(user)"></user-details>
+                <user-summary v-bind:usr="user" v-on:accept="registerUser(user)"></user-summary>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-    import UserDetails from './UserDetails.vue';
+    import UserDetails from './UserSummary.vue';
     export default {  
         name: 'user-list',
         components: {
-            'user-details': UserDetails
+            'user-summary': UserSummary
         },
         props: ['data', 'usersComing'],
         methods: {
