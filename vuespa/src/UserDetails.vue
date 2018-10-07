@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="user-details">
         id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} 
         <button v-on:click="acceptInvitation">Accept invit</button>
     </div>
@@ -19,5 +19,11 @@
 </script>
 
 <style>
-    
+    .user-details {
+        border: 2px solid grey;
+        margin: 10px;
+        padding: 15px;
+        width: 250px;
+        float: left;
+    }
 </style>
