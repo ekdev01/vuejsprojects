@@ -1,7 +1,7 @@
 <template>
-    <div class="user-details">
-        id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} <br /> 
-        <button v-on:click="acceptInvitation">Accept invit</button>
+    <div>
+       <h2>Détails de l'utilisateur {{this.$route.params.id}}</h2>
+       <p><a href="#">Retour</a></p>
     </div>
 </template>
 
@@ -17,13 +17,3 @@
         }
     }
 </script>
-
-<style>
-    .user-details {
-        border: 2px solid grey;
-        margin: 10px;
-        padding: 15px;
-        width: 250px;
-        float: left;
-    }
-</style>
