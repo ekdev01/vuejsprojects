@@ -1,6 +1,6 @@
 <template>
     <div class="user-details">
-        id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} 
+        id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} <br /> 
         <button v-on:click="acceptInvitation">Accept invit</button>
     </div>
 </template>
