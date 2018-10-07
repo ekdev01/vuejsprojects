@@ -15,7 +15,13 @@ const routes = [
   { path: '/users/:id', component: UserDetails} // http://localhost:8082/users/1
 ];
 
+// La Variable router pour gerer l'ensemble des routes
+const router = new VueRouter({
+  routes // equivaut a routes:routes
+});
+
 new Vue({
   el: '#app',
+  router,
   render: h => h(App)
 })
