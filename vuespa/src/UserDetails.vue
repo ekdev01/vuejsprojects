@@ -1,7 +1,7 @@
 <template>
     <div>
        <h2>Détails de l'utilisateur {{this.$route.params.id}}</h2>
-       <p><a href="#">Retour</a></p>
+       <p><router-link to="/users">Retour</router-link></p>
     </div>
 </template>
 
