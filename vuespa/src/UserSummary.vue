@@ -1,6 +1,7 @@
 <template>
     <div class="user-summary">
         id: {{usr.id}}, ville: {{usr.address.city}}, 
+        <!-- Liens dynamiques -->
         email: <router-link v-bind:to="`/users/${usr.id}`">{{usr.email}}</router-link> <br /> 
         <button v-on:click="acceptInvitation">Accept invit</button>
     </div>
