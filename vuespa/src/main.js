@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import UserList from './UserList.vue';
-import UserList from './UserDetails.vue';
+import UserDetails from './UserDetails.vue';
 
 import App from './App.vue'
 
