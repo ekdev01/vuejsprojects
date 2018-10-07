@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import UserDetails from './UserSummary.vue';
+    import UserSummary from './UserSummary.vue';
     export default {  
         name: 'user-list',
         components: {
