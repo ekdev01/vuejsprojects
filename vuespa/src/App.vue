@@ -20,9 +20,10 @@
         usersWhoWillCome: []
       }
     },
-    created: () => { 
+    created: function() { 
+      // Requete Ajax 
       axios.get(this.usersUrl)
-        .then( (response) => {
+        .then((response) => {
           this.users = response.data;
           console.log(this.users);
         })
