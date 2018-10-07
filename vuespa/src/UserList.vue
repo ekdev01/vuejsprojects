@@ -24,7 +24,9 @@
             }
         },
         data: function() {
-            return usersWhoWillCome: []
+            return {
+                usersWhoWillCome: []
+            }
         }
     }
 </script>
