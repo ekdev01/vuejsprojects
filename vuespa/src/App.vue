@@ -10,6 +10,9 @@
 
   export default {
     name: 'app',
+    components: {
+      'user-list': UserList
+    },
     data () {
       return {
         usersUrl: 'https://jsonplaceholder.typicode.com/users',
