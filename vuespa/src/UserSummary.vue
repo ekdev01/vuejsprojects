@@ -1,6 +1,7 @@
 <template>
     <div class="user-summary">
-        id: {{usr.id}}, ville: {{usr.address.city}}, email: {{usr.email}} <br /> 
+        id: {{usr.id}}, ville: {{usr.address.city}}, 
+        email: <router-link v-bind:to="`/users/${user.id}`">{{usr.email}}</router-link> <br /> 
         <button v-on:click="acceptInvitation">Accept invit</button>
     </div>
 </template>
