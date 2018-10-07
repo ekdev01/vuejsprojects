@@ -2,6 +2,9 @@
   <div id="app">
     <user-list v-bind:data="users" v-bind:users-coming="usersWhoWillCome"></user-list>
   </div>
+  <div v-for="user in usersWhoWillCome">
+    {{user.id}} -  {{user.email}}
+  </div>
 </template>
 
 
