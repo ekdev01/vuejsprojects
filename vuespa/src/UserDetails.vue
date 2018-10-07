@@ -1,6 +1,7 @@
 <template>
     <div>
        <h2>Détails de l'utilisateur {{this.$route.params.id}}</h2>
+       <!-- Lien static -->
        <p><router-link to="/users">Retour</router-link></p>
     </div>
 </template>
