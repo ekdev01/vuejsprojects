@@ -5,6 +5,7 @@ const bodyParser        = require('body-parser')
 const express           = require('express')
 const app               = express()
 const morgan            = require('morgan')
+const config            = require('./config')
 
 // constante members qui contiendra tous les membres
 const members = [
@@ -135,9 +136,9 @@ MembersRouter.route('/')
     })
 
 // on definit un middleware pour lier l'url /api/v1/members et le router MembersRouter
-app.use('/api/v1/members', MembersRouter)
+app.use(config.rootAPI + 'members', MembersRouter)
 
-app.listen(8080, () => { console.log('Started on port 8080') })
+app.listen(config.port, () => { console.log('Started on port ' + config.port) })
 
 function getIndex(id) {
     for(let i=0; i<members.length; i++) {
