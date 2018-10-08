@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 // Creation requete GET /api
-app.get('/api', (res, req) => {
+app.get('/api', (req, res) => {
     res.send('Root API')
 })
 
