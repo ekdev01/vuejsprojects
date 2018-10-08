@@ -32,6 +32,8 @@ app.get('/api/v1/members', (req, res) => {
 
     if(req.query.max != undefined && req.query.max > 0) {
         res.json(success(members.slice(0, req.query.max)))
+    } else if(req.query.max != undefined) {  // Cas d'erreur
+        res.json(error('Wrong max value'))
     } else {
         res.json(success(members))
     }
