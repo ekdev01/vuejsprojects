@@ -1,10 +1,10 @@
 require('babel-register')
-const func          = require('functions')
-const bodyParser    = require('body-parser')
+const {success, error}  = require('functions')
+const bodyParser        = require('body-parser')
 
-const express       = require('express')
-const app           = express()
-const morgan        = require('morgan')
+const express           = require('express')
+const app               = express()
+const morgan            = require('morgan')
 
 // constante members qui contiendra tous les membres
 const members = [
@@ -23,27 +23,31 @@ const members = [
 ]
 
 // les middleware ici
+
+// middleware morgan pour le debuggage
 app.use(morgan('dev'))
-app.use(bodyParser.json()); // pour le parsing des reponse en application/json
+
+// middleware body-parser pour le parsing des reponses json 
+app.use(bodyParser.json());                         // pour le parsing des reponse en application/json
 app.use(bodyParser.urlencoded({ extended: true })); // pour le parsing des donnes formulaire en application/x-www-form-urlencoded
 
 // Retourne un membre a partir de l'id
 app.get('/api/v1/members/:id', (req, res) => {
     // Renvoie le membre correspondant a id.
-    res.json(func.success(members[(req.params.id) - 1]))
+    res.json(success(members[(req.params.id) - 1]))
 })
 
 // Renvoie tous les membres
 app.get('/api/v1/members', (req, res) => {
 
     if(req.query.max != undefined && req.query.max > 0) {
-        res.json(func.success(members.slice(0, req.query.max)))
+        res.json(success(members.slice(0, req.query.max)))
     } 
     else if(req.query.max != undefined) {  // Cas d'erreur
-        res.json(func.error('Wrong max value'))
+        res.json(error('Wrong max value'))
     } 
     else {
-        res.json(func.success(members))
+        res.json(success(members))
     }
 })
 
@@ -63,20 +67,18 @@ app.post('/api/v1/members', (req, res) => {
         }
 
         if(sameName) {
-            res.json(func.error('name already taken'))
-        } 
-        else {
+            res.json(error('name already taken'))
+        } else {
             let member = {
                 id: members.length + 1,
                 name: req.body.name
             }
             // ajout nouveau membre 
             members.push(member)
-            res.json(func.success(member))
+            res.json(success(member))
         }
-    }
-    else {
-        res.json(func.error('no name value'))
+    } else {
+        res.json(error('no name value'))
     }
 })
 
