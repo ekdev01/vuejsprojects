@@ -120,7 +120,7 @@ app.post('/api/v1/members', (req, res) => {
             res.json(error('name already taken'))
         } else {
             let member = {
-                id: members.length + 1,
+                id: createID(),
                 name: req.body.name
             }
             // ajout nouveau membre 
@@ -140,4 +140,8 @@ function getIndex(id) {
             return i
     }
     return 'wrong id'
+}
+
+function createID() {
+    return members[members.length-1].id + 1
 }
