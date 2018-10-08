@@ -80,7 +80,7 @@ app.put('/api/v1/members/:id', (req, res) => {
             res.json(error('same name'))
         } else {
             console.log('Update member')
-            members[index].name = req.params.name
+            members[index].name = req.body.name
             res.json(success(true))
         }
     }
