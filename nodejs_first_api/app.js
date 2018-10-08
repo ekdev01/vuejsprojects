@@ -52,20 +52,29 @@ app.post('/api/v1/members', (req, res) => {
 
     if(req.body.name) {
 
+        let sameName = false
+
         // on verifie si nom deja pris
         for(let i=0; i<members.length; i++) {
             if (members[i].name == req.body.name) {
                 res.json(func.error('name already taken'))
+                sameName = true
+                break
             }
         }
 
-        // ajout nouveau membre 
-        let member = {
-            id: members.length + 1,
-            name: req.body.name
+        if(sameName) {
+            res.json(func.error('name already taken'))
+        } 
+        else {
+            let member = {
+                id: members.length + 1,
+                name: req.body.name
+            }
+            // ajout nouveau membre 
+            members.push(member)
+            res.json(func.success(member))
         }
-        members.push(member)
-        res.json(func.success(member))
     }
     else {
         res.json(func.error('no name value'))
