@@ -15,6 +15,11 @@ app.get('/api/v1/books/:id', (req, res) => {
     res.send(req.params)
 })
 
+app.get('/api/v1/books/:id/:name', (req, res) => {
+    res.send(req.params)
+})
+
+
 // Execution de l'application sur le port 8080 avec 
 // en callback un message dans la console
 app.listen(8080, () => { console.log('Started on port 8080') })
