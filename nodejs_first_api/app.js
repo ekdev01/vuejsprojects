@@ -24,18 +24,16 @@ app.use(morgan('dev'))
 // Retourne un membre a partir de l'id
 app.get('/api/v1/members/:id', (req, res) => {
     // Renvoie le membre correspondant a id.
-    res.send(members[(req.params.id) - 1])
+    res.json(members[(req.params.id) - 1])
 })
 
 // Renvoie tous les membres
 app.get('/api/v1/members', (req, res) => {
 
     if(req.query.max != undefined && req.query.max > 0) {
-        res.send(members.slice(0, req.query.max))
+        res.json(members.slice(0, req.query.max))
     } else {
-        res.send(members)
+        res.json(members)
     }
 })
-
-
 app.listen(8080, () => { console.log('Started on port 8080') })
