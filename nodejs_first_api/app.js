@@ -2,6 +2,12 @@ require('babel-register')
 const express = require('express')
 const app = express()
 
+app.use((req, res, next) => {
+  console.log('Time: %d', Date.now() + ' ')
+  console.log('URL: ', req.url)
+  next();
+});
+
 // Creation requete GET /api
 app.get('/api', (req, res) => {
     res.send('Root API')
