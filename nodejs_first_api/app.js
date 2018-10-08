@@ -57,7 +57,6 @@ app.post('/api/v1/members', (req, res) => {
         // on verifie si nom deja pris
         for(let i=0; i<members.length; i++) {
             if (members[i].name == req.body.name) {
-                res.json(func.error('name already taken'))
                 sameName = true
                 break
             }
