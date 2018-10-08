@@ -1,4 +1,6 @@
 require('babel-register')
+require('http')
+
 const express = require('express')
 const app = express()
 
