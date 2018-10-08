@@ -51,6 +51,14 @@ app.get('/api/v1/members', (req, res) => {
 app.post('/api/v1/members', (req, res) => {
 
     if(req.body.name) {
+
+        // on verifie si nom deja pris
+        for(let i=0; i<members.length; i++) {
+            if (members[i].name == req.body.name) {
+                res.json(func.error('name already taken'))
+            }
+        }
+
         // ajout nouveau membre 
         let member = {
             id: members.length + 1,
