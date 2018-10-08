@@ -1,8 +1,10 @@
 require('babel-register')
-const express   = require('express')
-const app       = express()
-const morgan    = require('morgan')
-const func      = require('functions')
+const func          = require('functions')
+const bodyParser    = require('body-parser')
+
+const express       = require('express')
+const app           = express()
+const morgan        = require('morgan')
 
 // constante members qui contiendra tous les membres
 const members = [
@@ -20,7 +22,10 @@ const members = [
     }
 ]
 
+// les middleware ici
 app.use(morgan('dev'))
+app.use(bodyParser.json()); // pour le parsing des reponse en application/json
+app.use(bodyParser.urlencoded({ extended: true })); // pour le parsing des donnes formulaire en application/x-www-form-urlencoded
 
 // Retourne un membre a partir de l'id
 app.get('/api/v1/members/:id', (req, res) => {
