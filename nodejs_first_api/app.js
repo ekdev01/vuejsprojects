@@ -49,7 +49,19 @@ app.get('/api/v1/members', (req, res) => {
 
 //
 app.post('/api/v1/members', (req, res) => {
-    res.send(req.body)
+
+    if(req.body.name) {
+        // ajout nouveau membre 
+        let member = {
+            id: members.length + 1,
+            name: req.body.name
+        }
+        members.push(member)
+        res.json(func.success(member))
+    }
+    else {
+        res.json(func.error('no name value'))
+    }
 })
 
 app.listen(8080, () => { console.log('Started on port 8080') })
