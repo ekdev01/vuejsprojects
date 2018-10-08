@@ -41,4 +41,10 @@ app.get('/api/v1/members', (req, res) => {
         res.json(func.success(members))
     }
 })
+
+//
+app.post('/api/v1/members', (req, res) => {
+    res.send(req.body)
+})
+
 app.listen(8080, () => { console.log('Started on port 8080') })
