@@ -28,7 +28,7 @@ app.get('/api/v1/members/:id', (req, res) => {
 })
 
 // Renvoie tous les membres
-app.get('/api/v1/members', () => {
+app.get('/api/v1/members', (req, res) => {
     res.send(members)
 })
 
