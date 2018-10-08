@@ -21,9 +21,16 @@ const members = [
 
 app.use(morgan('dev'))
 
+// Retourne un membre a partir de l'id
 app.get('/api/v1/members/:id', (req, res) => {
     // Renvoie le membre correspondant a id.
     res.send(members[(req.params.id) - 1])
 })
+
+// Renvoie tous les membres
+app.get('/api/v1/members', () => {
+    res.send(members)
+})
+
 
 app.listen(8080, () => { console.log('Started on port 8080') })
