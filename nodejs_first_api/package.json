@@ -9,5 +9,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "express": "^4.16.3"
+  }
 }
