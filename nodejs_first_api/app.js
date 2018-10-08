@@ -1,11 +1,8 @@
-require('babel-register')
-require('http')
-
 const express = require('express')
 const app = express()
 
 // Creation requete GET /api
-app.get('/api' . (res, req) => {
+app.get('/api', (res, req) => {
     res.send('Root API')
 })
 
