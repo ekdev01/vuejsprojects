@@ -31,7 +31,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.json());                         // pour le parsing des reponse en application/json
 app.use(bodyParser.urlencoded({ extended: true })); // pour le parsing des donnes formulaire en application/x-www-form-urlencoded
 
-// Retourne un membre a partir de l'id
+// Pour la lecture d'un membre a partir de son id 
 app.get('/api/v1/members/:id', (req, res) => {
 
     let index = getIndex(req.params.id)
@@ -43,7 +43,7 @@ app.get('/api/v1/members/:id', (req, res) => {
     }
 })
 
-// Renvoie tous les membres
+// Pour la lecture de tous les membres
 app.get('/api/v1/members', (req, res) => {
 
     if(req.query.max != undefined && req.query.max > 0) {
@@ -57,7 +57,36 @@ app.get('/api/v1/members', (req, res) => {
     }
 })
 
-//
+// Pour la mise a jour d'un membre a partir de son id
+app.put('/api/v1/members/:id', (req, res) => {
+
+    let index = getIndex(req.params.id)
+
+    if(typeof(index) == 'string') {
+        res.json(error(index))
+    } 
+    else {
+        let same = false
+
+        // on verifie si nom deja pris
+        for(let i=0; i<members.length; i++) {
+            if(req.body.name == members[i].name && req.params.id != members[i].id) {
+                same = true
+                break
+            }
+        }
+
+        if(same) {
+            res.json(error('same name'))
+        } else {
+            members[index].name = req.params.name
+            res.json(success(true))
+        }
+    }
+
+})
+
+// Pour la creation d'un membre 
 app.post('/api/v1/members', (req, res) => {
 
     if(req.body.name) {
