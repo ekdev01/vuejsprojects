@@ -33,8 +33,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // pour le parsing des donne
 
 // Retourne un membre a partir de l'id
 app.get('/api/v1/members/:id', (req, res) => {
-    // Renvoie le membre correspondant a id.
-    res.json(success(members[(req.params.id) - 1]))
+
+    let index = getIndex(req.params.id)
+
+    if(typeof(index) == 'string') {
+        res.json(error(index))
+    } else {
+        res.json(success(members[index]))
+    }
 })
 
 // Renvoie tous les membres
@@ -83,3 +89,11 @@ app.post('/api/v1/members', (req, res) => {
 })
 
 app.listen(8080, () => { console.log('Started on port 8080') })
+
+function getIndex(id) {
+    for(let i=0; i<members.length; i++) {
+        if(members[i].id == id)
+            return i
+    }
+    return 'wrong id'
+}
