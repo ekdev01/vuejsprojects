@@ -29,7 +29,12 @@ app.get('/api/v1/members/:id', (req, res) => {
 
 // Renvoie tous les membres
 app.get('/api/v1/members', (req, res) => {
-    res.send(members)
+
+    if(req.query.max != undefined) {
+        res.send(members.slice(0, req.query.max))
+    } else {
+        res.send(members)
+    }
 })
 
 
