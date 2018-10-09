@@ -1,12 +1,13 @@
 require('babel-register')
 
 console.log('Debut')
-getMember()
+let member = getMember()
+console.log(member)
 console.log('Fin')
 
 
 function getMember() {
     setTimeout(() => {
-        console.log('Member 1')
+        return 'Member 1'
     }, 1500)
 }
