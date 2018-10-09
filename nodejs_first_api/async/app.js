@@ -3,7 +3,7 @@ require('babel-register')
 console.log('Debut')
 
 getMember()
-    .then(member => console.log(member))
+    .then(member => getArticles(member))
     .then(articles => console.log(articles))
 
 function getMember() {
