@@ -1,9 +1,12 @@
 require('babel-register')
 
 console.log('Debut')
-
-setTimeout(() => {
-    console.log('In timeout')
-}, 1500)
-
+getMember()
 console.log('Fin')
+
+
+function getMember() {
+    setTimeout(() => {
+        console.log('Member 1')
+    }, 1500)
+}
