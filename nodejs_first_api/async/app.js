@@ -1,13 +1,13 @@
 require('babel-register')
 
 console.log('Debut')
-let member = getMember()
-console.log(member)
+getMember( (member) => {
+    console.log(member)
+})
 console.log('Fin')
 
-
-function getMember() {
+function getMember(next) {
     setTimeout(() => {
-        return 'Member 1'
+        next('Member 1') 
     }, 1500)
 }
