@@ -13,8 +13,8 @@ let p1 = new Promise((resolve, reject) => {
 let p2 = new Promise((resolve, reject) => {
     setTimeout(() => {
         resolve('p2')
-    })
-}, 3000)
+    }, 3000)
+})
 
 // mise en paralelle
 Promise.race([p1, p2])
