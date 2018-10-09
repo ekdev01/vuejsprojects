@@ -1,6 +1,6 @@
 require('babel-register')
 
-console.log('Debut')
+console.log('Debut');
 
 /*getMember()
     .then(member => getArticles(member))
