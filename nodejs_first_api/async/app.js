@@ -2,14 +2,19 @@ require('babel-register')
 
 console.log('Debut');
 
-/*getMember()
+getMember()
     .then(member => getArticles(member))
     .then(articles => console.log(articles))
-    .catch(err => console.log(err.message))*/
+    .catch(err => console.log(err.message))
+
 (async () => {
-    let member = await getMember() // attend le retour de la promesse (le resultat)
-    let articles = await getArticles(member) // attend le retour de la promesse (le resultat)
-    console.log(articles) // devrait afficher le tableau [1, 2, 3]
+    try {
+        let member = await getMember() // attend le retour de la promesse (le resultat)
+        let articles = await getArticles(member) // attend le retour de la promesse (le resultat)
+        console.log(articles) // devrait afficher le tableau [1, 2, 3]
+    } catch(err) {
+        console.log(err.message)
+    }
 })()
 
 function getMember() {
