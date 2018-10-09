@@ -1,7 +1,7 @@
 require('babel-register')
 
 console.log('Debut')
-let p = new Promise((resolve, reject) => {
+new Promise((resolve, reject) => {
 
     setTimeout(() => {
         //resolve('All good.')
@@ -9,12 +9,8 @@ let p = new Promise((resolve, reject) => {
     }, 1500)
 
 })
-
-p.then((message) => {
-    console.log(message)
-}).catch((err) => {
-    console.log(err.message)
-})
+    .then(message => console.log(message))
+    .catch(err => console.log(err.message))
 
 console.log('Fin')
 
