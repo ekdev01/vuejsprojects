@@ -10,9 +10,8 @@ getMember()
 function getMember() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            //console.log('Member 1')
-            //resolve('Member 1')
-            reject(new Error('Error during getMember...'))
+            console.log('Member 1')
+            resolve('Member 1')
         }, 1500)
     })
 }
@@ -20,7 +19,8 @@ function getMember() {
 function getArticles(member) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve([1, 2, 3])
+            //resolve([1, 2, 3])
+            reject(new Error('Error during getMember...'))
         }, 1500)
     })
 }
