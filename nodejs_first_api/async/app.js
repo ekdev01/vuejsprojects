@@ -6,13 +6,11 @@ console.log('Debut')
     .then(member => getArticles(member))
     .then(articles => console.log(articles))
     .catch(err => console.log(err.message))*/
-
-async function viewArticles() {
+(async () => {
     let member = await getMember() // attend le retour de la promesse (le resultat)
-    let articles = await getArticles() // attend le retour de la promesse (le resultat)
+    let articles = await getArticles(member) // attend le retour de la promesse (le resultat)
     console.log(articles) // devrait afficher le tableau [1, 2, 3]
-}
-viewArticles()
+})()
 
 function getMember() {
     return new Promise((resolve, reject) => {
