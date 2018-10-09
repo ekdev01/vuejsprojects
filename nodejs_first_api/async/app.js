@@ -1,13 +1,30 @@
 require('babel-register')
 
 console.log('Debut')
-getMember( (member) => {
+let p = new Promise((resolve, reject) => {
+
+    setTimeout(() => {
+        resolve('All good.')
+        //reject(new Error('Error during...'))
+    }, 1500)
+
+})
+
+p.then((message) => {
+    console.log(message)
+}).catch((err) => {
+    console.log(err.message)
+})
+
+console.log('Fin')
+
+/*
+getMember((member) => {
     console.log(member)
     getArticles(member, (articles) => {
         console.log(articles)
     })
 })
-console.log('Fin')
 
 function getMember(next) {
     setTimeout(() => {
@@ -20,3 +37,4 @@ function getArticles(member, next) {
         next([1, 2, 3])
     }, 1500)
 }
+*/
