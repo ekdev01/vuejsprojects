@@ -9,8 +9,8 @@ new Promise((resolve, reject) => {
     }, 1500)
 
 })
-    .then(message => console.log(message))
-    .catch(err => console.log(err.message))
+.then(message => console.log(message))
+.catch(err => console.log(err.message))
 
 console.log('Fin')
 
