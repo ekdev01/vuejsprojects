@@ -4,8 +4,8 @@ console.log('Debut')
 let p = new Promise((resolve, reject) => {
 
     setTimeout(() => {
-        resolve('All good.')
-        //reject(new Error('Error during...'))
+        //resolve('All good.')
+        reject(new Error('Error during...'))
     }, 1500)
 
 })
