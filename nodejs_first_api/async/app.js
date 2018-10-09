@@ -1,11 +1,11 @@
 require('babel-register')
 
-console.log('Debut');
+console.log('Debut')
 
 getMember()
     .then(member => getArticles(member))
     .then(articles => console.log(articles))
-    .catch(err => console.log(err.message))
+    .catch(err => console.log(err.message));
 
 (async () => {
     try {
