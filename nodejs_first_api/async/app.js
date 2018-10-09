@@ -2,22 +2,30 @@ require('babel-register')
 
 console.log('Debut')
 
-// promise one
-let p1 = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('p1')
-    }, 1500)
-})
+/*getMember()
+    .then(member => getArticles(member))
+    .then(articles => console.log(articles))
+    .catch(err => console.log(err.message))*/
 
-// promise two
-let p2 = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('p2')
-    }, 3000)
-})
+let member = await getMember() // attend le retour de la promesse (le resultat)
+let articles = await getArticles() // attend le retour de la promesse (le resultat)
+console.log(articles) // devrait afficher le tableau [1, 2, 3]
 
-// mise en paralelle
-Promise.race([p1, p2])
-    .then(result => console.log(result))
+
+function getMember() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('Member 1')
+        }, 1500)
+    })
+}
+
+function getArticles(member) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve([1, 2, 3])
+        }, 1500)
+    })
+}
 
 console.log('Fin')
