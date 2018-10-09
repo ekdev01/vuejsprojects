@@ -7,10 +7,12 @@ console.log('Debut')
     .then(articles => console.log(articles))
     .catch(err => console.log(err.message))*/
 
-let member = await getMember() // attend le retour de la promesse (le resultat)
-let articles = await getArticles() // attend le retour de la promesse (le resultat)
-console.log(articles) // devrait afficher le tableau [1, 2, 3]
-
+async function viewArticles() {
+    let member = await getMember() // attend le retour de la promesse (le resultat)
+    let articles = await getArticles() // attend le retour de la promesse (le resultat)
+    console.log(articles) // devrait afficher le tableau [1, 2, 3]
+}
+viewArticles()
 
 function getMember() {
     return new Promise((resolve, reject) => {
